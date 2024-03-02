@@ -1,0 +1,163 @@
+﻿@model List<Polizia_Municipale.Models.Nominativo>
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mb-4">Gestione Verbali Polizia Municipale</h1>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddModal">
+                Nuovo Elemento
+            </button>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Cognome</th>
+                        <th scope="col">Indirizzo</th>
+                        <th scope="col">Città</th>
+                        <th scope="col">CAP</th>
+                        <th scope="col">Codice Fiscale</th>
+                        <th scope="col">Controlli</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Nominativo persona in Model)
+                    {
+                        <tr>
+                            <th scope="row">@persona.Id</th>
+                            <td>@persona.Nome</td>
+                            <td>@persona.Cognome</td>
+                            <td>@persona.Indirizzo</td>
+                            <td>@persona.Città</td>
+                            <td>@persona.CAP</td>
+                            <td>@persona.CodiceFiscale</td>
+                            <td>
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#NewVerbale_@persona.Id">
+                                    Fai un Verbale
+                                </button>
+
+                                <div class="modal fade" id="NewVerbale_@persona.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Nuovo Verbale</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form asp-controller="Home" asp-action="Verbale" asp-route-id="@persona.Id" method="post">
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="Nominativo" class="form-label">Nominativo:</label>
+                                                        <input type="text" class="form-control" disabled name="Nominativo" value="@persona.Nome @persona.Cognome" />
+                                                        <input type="hidden" name="IdNominativo" value="@persona.Id" />
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="DataViolazione" class="form-label">Data Violazione:</label>
+                                                        <input type="date" class="form-control" name="DataViolazione" />
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="address" class="form-label">Indirizzo Violazione:</label>
+                                                        <input type="text" class="form-control" name="address" />
+                                                    </div>
+
+                                                    <input type="hidden" name="DataTrascrizioneVerbale" value="@DateTime.Now" />
+
+                                                    <div class="mb-3">
+                                                        <label for="Importo" class="form-label">Importo:</label>
+                                                        <input type="number" class="form-control" step="0.01" name="Importo" />
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="DecurtamentoPunti" class="form-label">Punti Decurtati:</label>
+                                                        <input type="number" class="form-control" name="DecurtamentoPunti" />
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="TipoViolazione" class="form-label">Tipo Violazione:</label>
+                                                        <select class="form-select" aria-label="Default select example" name="TipoViolazione">
+                                                            <option value="Passaggio con semaforo rosso">Passaggio con semaforo rosso</option>
+                                                            <option value="Autovelox">Autovelox</option>
+                                                            <option value="Passaggio non autorizzato">Passaggio non autorizzato</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="fullName" class="form-label">NominativoAgente:</label>
+                                                        <input type="text" class="form-control" name="fullName" />
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                    <input type="hidden" name="Id" value="@persona.Id" />
+                                                    <button type="submit" class="btn btn-primary">Aggiungi</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+            <div class="modal fade" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form asp-controller="Home" asp-action="Add" method="post">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Nuovo Elemento</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="first_name" class="form-label">Nome:</label>
+                                    <input type="text" class="form-control" name="first_name" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="last_name" class="form-label">Cognome:</label>
+                                    <input type="text" class="form-control" name="last_name" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Indirizzo:</label>
+                                    <input type="text" class="form-control" name="address" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="city" class="form-label">Città:</label>
+                                    <input type="text" class="form-control" name="city" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="cap" class="form-label">CAP:</label>
+                                    <input type="text" class="form-control" name="cap" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="cf" class="form-label">Codice Fiscale:</label>
+                                    <input type="text" class="form-control" name="cf" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Indietro</button>
+                                <button type="submit" class="btn btn-primary">Aggiungi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,24 @@
+﻿@model List<Polizia_Municipale.Models.VerbaliPerPersona>
+
+<h2 class="mb-3">Totale Verbali per Persone</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Nominativo</th>
+            <th scope="col">Numero di verbali</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (VerbaliPerPersona verbale in Model)
+        {
+            <tr>
+                <td>@verbale.Nome @verbale.Cognome</td>
+
+                <td>@verbale.TotaleVerbali</td>
+            </tr>
+
+        }
+    </tbody>
+</table>

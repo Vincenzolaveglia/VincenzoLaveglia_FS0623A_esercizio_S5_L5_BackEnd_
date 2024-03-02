@@ -1,0 +1,27 @@
+﻿@model List<Polizia_Municipale.Models.JoinModel>
+
+<h2 class="mb-3">Multe Superiori di 10 Punti</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Data Violazione</th>
+            <th scope="col">Importo</th>
+            <th scope="col">Punti Decurtati</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (JoinModel verbale in Model)
+        {
+            <tr>
+                <td>@verbale.Nome @verbale.Cognome</td>
+                <td>@verbale.DataViolazione.ToShortDateString()</td>
+                <td>@verbale.Importo</td>
+                <td>@verbale.DecurtamentoPunti</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
