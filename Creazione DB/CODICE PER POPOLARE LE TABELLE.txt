@@ -1,0 +1,70 @@
+INSERT INTO [dbo].[Anagrafica]
+       ([Nome]
+       ,[Cognome]
+       ,[Indirizzo]
+       ,[Città]
+       ,[CAP]
+       ,[CodiceFiscale])
+ VALUES
+       ('Luca', 'Bianchi', 'Via Milano 2', 'Milano', '20100', 'BNCLCU02A02H501C')
+       ('Paola', 'Verdi', 'Via Napoli 3', 'Napoli', '80100', 'VRDPAL03A03H501D')
+       ('Giuseppe', 'Russo', 'Via Palermo 4', 'Palermo', '90100', 'RSSGPP04A04H501E')
+       ('Anna', 'Ferrari', 'Via Firenze 5', 'Firenze', '50100', 'FRRNNA05A05H501F')
+GO
+
+
+
+USE [Polizia_Municipale]
+GO
+
+INSERT INTO [dbo].[Verbali]
+           ([DataViolazione]
+           ,[IndirizzoViolazione]
+           ,[DataTrascrizioneVerbale]
+           ,[Importo]
+           ,[DecurtamentoPunti]
+           ,[TipoViolazione]
+           ,[Nominativo]
+           ,[NominativoAgente])
+     VALUES
+           ('2024-02-28', 'Via Verdi 10', '2024-03-01', 500.00, 20, 2, 1, 1),
+	   ('2024-02-27', 'Via Bianchi 20', '2024-03-01', 100.00, 2, 1, 2, 2),
+	   ('2024-02-26', 'Via Rossi 30', '2024-03-01', 200.00, 4, 3, 3, 3),
+           ('2024-02-25', 'Via Ferrari 40', '2024-03-01', 120.00, 2, 1, 4, 4)
+GO
+
+
+
+
+USE [Polizia_Municipale]
+GO
+
+INSERT INTO [dbo].[NominativiAgente]
+           ([Nome]
+           ,[Cognome]
+           ,[Città]
+           ,[Stazione])
+     VALUES
+	 ('Marco', 'Rossi', 'Roma', 'Stazione Centrale Roma'),
+	 ('Luigi', 'Bianchi', 'Milano', 'Stazione Centrale Milano'),
+	 ('Giovanna', 'Verdi', 'Napoli', 'Stazione Centrale Napoli'),
+	 ('Giorgio', 'Russo', 'Palermo', 'Stazione Centrale Palermo')
+GO
+
+
+USE [Polizia_Municipale]
+GO
+
+INSERT INTO [dbo].[Tipo Violazione]
+           ([Descrizione])
+     VALUES
+           ('Eccesso di velocità'),
+		   ('Guida in stato di ebbrezza'),
+		   ('Attraversamento col rosso'),
+		   ('Mancato utilizzo del casco'),
+		   ('Utilizzo del telefono mentre si guida')
+GO
+
+
+
+
